@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WebAPIDemoV2.Controllers;
 using WebAPIDemoV2.DataAccess;
 using WebAPIDemoV2.DataAccess.Interfaces;
+using WebAPIDemoV2.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<WebApiDemoDbContext>(
     opt => opt.UseSqlite("Data Source=WebApiDemo.db")
 );
 
-builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IRepository<UserModel>, AbstractRepository<UserModel>>();
 
 var app = builder.Build();
 
