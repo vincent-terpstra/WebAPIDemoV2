@@ -9,8 +9,6 @@ public class UsersController
 {
     public void MapRoutes(WebApplication app)
     {
-        app.MapGet("/users/{id}", GetUser);
-        app.MapGet("/users", GetAllUsers);
         app.MapPost("/users", AddUser);
     }
 

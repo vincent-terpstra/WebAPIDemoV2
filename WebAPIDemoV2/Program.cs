@@ -33,9 +33,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+
+
 UsersController usersController = new();
 usersController.MapRoutes(app);
 
-
+new RouteMapper<UserModel>(app, "/user")
+    .MapGetAll()
+    .MapGetById();
 
 app.Run();
