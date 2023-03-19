@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebAPIDemoV2.Controllers.Commands;
 using WebAPIDemoV2.DataAccess.Interfaces;
 using WebAPIDemoV2.Domain.Entities;
 
@@ -13,13 +14,17 @@ public class UsersController
         app.MapPost("/users", AddUser);
     }
 
-    UserModel? GetUser([FromServices] IUsersRepository repo, [FromRoute] int id)
+    UserModel? GetUser([FromServices] IRepository<UserModel> repo, [FromRoute] int id)
         => repo.Get(id);
 
-    List<UserModel> GetAllUsers([FromServices] IUsersRepository repo)
+    List<UserModel> GetAllUsers([FromServices] IRepository<UserModel> repo)
         => repo.GetAll();
 
-    UserModel AddUser([FromServices] IUsersRepository repo, [FromBody] UserModel adduser)
-        => repo.Add(adduser);
+    UserModel AddUser([FromServices] IRepository<UserModel> repo, [FromBody] AddUser adduser)
+        => repo.Add(new UserModel()
+        {
+            FirstName = adduser.FirstName,
+            LastName = adduser.LastName
+        });
 
 }
