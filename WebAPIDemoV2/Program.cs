@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using WebAPIDemoV2;
 using WebAPIDemoV2.Controllers;
+using WebAPIDemoV2.Controllers.Commands;
 using WebAPIDemoV2.DataAccess;
 using WebAPIDemoV2.DataAccess.Interfaces;
 using WebAPIDemoV2.Domain.Entities;
@@ -33,13 +35,15 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
-
-UsersController usersController = new();
-usersController.MapRoutes(app);
-
-new RouteMapper<UserModel>(app, "/user")
+app.MapRoutes<UserModel>("/user", "Users")
     .MapGetAll()
-    .MapGetById();
+    .MapGetById()
+    .MapPost<AddUser>(
+        user => new()
+        {
+            FirstName = user.FirstName,
+            LastName = user.LastName
+        });
+
 
 app.Run();

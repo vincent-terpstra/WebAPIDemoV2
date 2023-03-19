@@ -1,4 +1,5 @@
 ﻿namespace WebAPIDemoV2.Controllers.Commands;
+#nullable disable
 
 public class AddUser
 {
