@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIDemoV2.Tests", "WebAPIDemoV2.Tests\WebAPIDemoV2.Tests.csproj", "{D4F4E082-0CB9-466A-9D35-3111BEA2C41C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIDemoV2.Domain", "WebAPIDemoV2.Domain\WebAPIDemoV2.Domain.csproj", "{7E069C07-4421-4922-92D8-ED349579A7F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIDemoV2", "WebAPIDemoV2\WebAPIDemoV2.csproj", "{1CCD30B2-8748-4F7E-993D-25A55CB3B23F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4F4E082-0CB9-466A-9D35-3111BEA2C41C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F4E082-0CB9-466A-9D35-3111BEA2C41C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F4E082-0CB9-466A-9D35-3111BEA2C41C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F4E082-0CB9-466A-9D35-3111BEA2C41C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E069C07-4421-4922-92D8-ED349579A7F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E069C07-4421-4922-92D8-ED349579A7F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E069C07-4421-4922-92D8-ED349579A7F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E069C07-4421-4922-92D8-ED349579A7F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CCD30B2-8748-4F7E-993D-25A55CB3B23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CCD30B2-8748-4F7E-993D-25A55CB3B23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CCD30B2-8748-4F7E-993D-25A55CB3B23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CCD30B2-8748-4F7E-993D-25A55CB3B23F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
