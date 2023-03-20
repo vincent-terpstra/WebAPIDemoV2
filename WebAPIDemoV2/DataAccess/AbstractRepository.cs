@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using WebAPIDemoV2.DataAccess.Interfaces;
 using WebAPIDemoV2.Domain.Entities;
 
@@ -25,6 +26,35 @@ public class AbstractRepository<T> : IRepository<T> where T : BaseModel
     {
         _models.Add(model);
         _context.SaveChanges();
+        return model;
+    }
+
+    public void Delete(int id)
+    {
+        var model = _models.FirstOrDefault(m => m.Id == id);
+        if(model != null)
+            _models.Remove(model);
+        _context.SaveChanges();
+    }
+
+    private readonly IEnumerable<PropertyInfo> _properties 
+        = typeof(T).GetProperties().Where(p => p.CanWrite);
+    
+    public T? Update(int id, T update)
+    {
+        update.Id = id;
+        var model = _models.FirstOrDefault(m => m.Id == id);
+
+        if (model is not null)
+        {
+            foreach (PropertyInfo prop in _properties)
+            {
+                var value = prop.GetValue(update);
+                if (value is not null)
+                    prop.SetValue(model, value);
+            }
+            _context.SaveChanges();
+        }
         return model;
     }
 }

@@ -38,6 +38,8 @@ app.MapControllers();
 app.MapRoutes<UserModel>("/user", "Users")
     .MapGetAll()
     .MapGetById()
+    .MapUpdate()
+    .MapDelete()
     .MapPost<AddUser>(
         user => new()
         {

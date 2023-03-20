@@ -39,6 +39,20 @@ public class RouteMapper<T>
         return this;
     }
 
+    public RouteMapper<T> MapDelete()
+    {
+        _app.MapDelete(@$"{_route}/{{id}}", Delete)
+            .WithTags(_tags);
+        return this;
+    }
+
+    public RouteMapper<T> MapUpdate()
+    {
+        _app.MapPatch(@$"{_route}/{{id}}", Update)
+            .WithTags(_tags);
+        return this;
+    }
+
 
     private T? Get([FromServices] IRepository<T> repo, [FromRoute] int id)
         => repo.Get(id);
@@ -48,4 +62,10 @@ public class RouteMapper<T>
 
     private Func<IRepository<T>, TAdd, T> CreatePostWithMapFunction<TAdd>(Func<TAdd, T> map)
         => ([FromServices] repository, [FromBody] add) => repository.Add(map(add));
+
+    private void Delete([FromServices] IRepository<T> repo, [FromRoute] int id)
+        => repo.Delete(id);
+
+    private T? Update([FromServices] IRepository<T> repo, [FromRoute] int id, [FromBody] T update)
+        => repo.Update(id, update);
 }
