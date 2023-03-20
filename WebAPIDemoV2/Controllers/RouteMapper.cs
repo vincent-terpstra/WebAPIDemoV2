@@ -8,25 +8,27 @@ public class RouteMapper<T>
     private readonly WebApplication _app;
     private readonly string _route;
     private readonly string _tags;
+    private readonly RouteGroupBuilder _group;
+
 
     public RouteMapper(WebApplication app, string route, string tags)
     {
         _app = app;
         _route = route;
         _tags = tags;
+        _group = _app.MapGroup(route);
     }
 
     public RouteMapper<T> MapGetById()
     {
-        _app.MapGet(@$"{_route}/{{id}}", Get)
-            .WithTags(_tags);
+        _group.MapGet("/{id}", Get).WithTags(_tags);
         return this;
     }
 
 
     public RouteMapper<T> MapGetAll()
     {
-        _app.MapGet(@$"{_route}s", GetAll)
+        _group.MapGet("/", GetAll)
             .WithTags(_tags);
         return this;
     }
@@ -34,21 +36,21 @@ public class RouteMapper<T>
 
     public RouteMapper<T> MapPost<TAdd>(Func<TAdd, T> map)
     {
-        _app.MapPost($@"{_route}", CreatePostWithMapFunction(map))
+        _group.MapPost("", CreatePostWithMapFunction(map))
             .WithTags(_tags);
         return this;
     }
 
     public RouteMapper<T> MapDelete()
     {
-        _app.MapDelete(@$"{_route}/{{id}}", Delete)
+        _group.MapDelete("/{id}", Delete)
             .WithTags(_tags);
         return this;
     }
 
     public RouteMapper<T> MapUpdate()
     {
-        _app.MapPatch(@$"{_route}/{{id}}", Update)
+        _group.MapPatch("/{id}", Update)
             .WithTags(_tags);
         return this;
     }

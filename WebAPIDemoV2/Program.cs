@@ -35,7 +35,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapRoutes<UserModel>("/user", "Users")
+app.MapRoutes<UserModel>("/users", "Users")
     .MapGetAll()
     .MapGetById()
     .MapUpdate()
