@@ -5,18 +5,14 @@ namespace WebAPIDemoV2.Controllers;
 
 public class RouteMapper<T>
 {
-    private readonly WebApplication _app;
-    private readonly string _route;
     private readonly string _tags;
     private readonly RouteGroupBuilder _group;
 
 
     public RouteMapper(WebApplication app, string route, string tags)
     {
-        _app = app;
-        _route = route;
         _tags = tags;
-        _group = _app.MapGroup(route);
+        _group = app.MapGroup(route);
     }
 
     public RouteMapper<T> MapGetById()

@@ -21,5 +21,4 @@
     <ItemGroup>
       <ProjectReference Include="..\WebAPIDemoV2.Domain\WebAPIDemoV2.Domain.csproj" />
     </ItemGroup>
-
 </Project>

@@ -1,16 +1,18 @@
+using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using WebAPIDemoV2;
-using WebAPIDemoV2.Controllers;
 using WebAPIDemoV2.Controllers.Commands;
 using WebAPIDemoV2.DataAccess;
 using WebAPIDemoV2.DataAccess.Interfaces;
 using WebAPIDemoV2.Domain.Entities;
 
+//[assembly: InternalsVisibleTo("WebAPIDemoV2.Tests")]
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -46,6 +48,6 @@ app.MapRoutes<UserModel>("/users", "Users")
             FirstName = user.FirstName,
             LastName = user.LastName
         });
-
-
 app.Run();
+
+public partial class Program { }
