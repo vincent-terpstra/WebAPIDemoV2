@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebAPIDemoV2.DataAccess.Interfaces;
 
-namespace WebAPIDemoV2.Controllers;
+namespace WebAPIDemoV2.API;
 
 public class RouteMapper<T>
 {

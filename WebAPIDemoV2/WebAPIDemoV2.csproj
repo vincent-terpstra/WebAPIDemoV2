@@ -17,8 +17,4 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.2.23128.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\WebAPIDemoV2.Domain\WebAPIDemoV2.Domain.csproj" />
-    </ItemGroup>
 </Project>

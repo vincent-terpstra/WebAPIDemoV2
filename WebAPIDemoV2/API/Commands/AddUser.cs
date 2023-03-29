@@ -1,8 +1,8 @@
-﻿namespace WebAPIDemoV2.Domain.Entities;
+﻿namespace WebAPIDemoV2.API.Commands;
+#nullable disable
 
-public class UserModel : BaseModel
+public class AddUser
 {
     public string FirstName { get; set; }
-    
     public string LastName { get; set; }
 }

@@ -5,7 +5,7 @@ using WebAPIDemoV2.Domain.Entities;
 
 namespace WebAPIDemoV2.DataAccess;
 
-public class AbstractRepository<T> : IRepository<T> where T : BaseModel
+public class AbstractRepository<T> : IRepository<T> where T : BaseModel, new()
 {
     private readonly DbContext _context;
     private readonly DbSet<T> _models;
@@ -15,6 +15,9 @@ public class AbstractRepository<T> : IRepository<T> where T : BaseModel
         _context = context;
         _models = context.Set<T>();
     }
+
+    public void SaveChanges() 
+        => _context.SaveChanges();
 
     public List<T> GetAll()
         => _models.AsNoTracking().ToList();
@@ -31,10 +34,15 @@ public class AbstractRepository<T> : IRepository<T> where T : BaseModel
 
     public void Delete(int id)
     {
-        var model = _models.FirstOrDefault(m => m.Id == id);
-        if(model != null)
-            _models.Remove(model);
-        _context.SaveChanges();
+        try
+        {
+            _models.Remove(new() {Id = id});
+            _context.SaveChanges();
+        }
+        catch
+        {
+            // ignored
+        }
     }
 
     private readonly IEnumerable<PropertyInfo> _properties 
