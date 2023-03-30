@@ -46,13 +46,13 @@ public class UserControllerShould : IClassFixture<CustomWebApplicationFactory<Pr
         var client = CreateClient();
         var user = await CreateUserAsync(client);
 
-        //Act
+        // Act
         var response = await client.GetAsync($"/users/{user.Id}");
         
         await response.AssertStatusSuccessAsync();
         User getUser = (await response.Content.ReadFromJsonAsync<User>())!;
         
-        //Assert
+        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(getUser.FirstName, user.FirstName);
         Assert.Equal(getUser.LastName, getUser.LastName);
@@ -61,31 +61,31 @@ public class UserControllerShould : IClassFixture<CustomWebApplicationFactory<Pr
     [Fact]
     public async Task Return_404_When_NotFound()
     {
-        //Arrange
+        // Arrange
         var client = CreateClient();
         
-        //Act
+        // Act
         var response = await client.GetAsync($"/users/404");
         
-        //Assert
+        // Assert
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 
     [Fact]
     public async Task Return_204_When_Deleted()
     {
-        //Arrange
+        // Arrange
         var client = CreateClient();
         var user = await CreateUserAsync(client);
 
-        //Act
+        // Act
         var delete = await client.DeleteAsync($"/users/{user.Id}");
         await delete.AssertStatusSuccessAsync();
 
-        //Assert
+        // Assert
         Assert.Equal(HttpStatusCode.NoContent, delete.StatusCode);
         
-        //Assert that the item is deleted
+        // Assert that the item is deleted
         var get = await client.GetAsync($"/users/{user.Id}");
         Assert.Equal(HttpStatusCode.NotFound, get.StatusCode);
     }
@@ -93,15 +93,15 @@ public class UserControllerShould : IClassFixture<CustomWebApplicationFactory<Pr
     [Fact]
     public async Task Patch_Updates_Content()
     {
-        //Arrange
+        // Arrange
         var client = CreateClient();
         var user = await CreateUserAsync(client);
         
-        //Act
-        var update = new { FirstName= "Updated Name" };
+        // Act
+        var update = new { FirstName = "Updated Name" };
         var patch = await client.PatchAsJsonAsync($"/users/{user.Id}", update);
         
-        //Assert
+        // Assert
         await patch.AssertStatusSuccessAsync();
         User updated = (await patch.Content.ReadFromJsonAsync<User>())!;
 
