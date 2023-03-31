@@ -1,11 +1,7 @@
 ﻿using System.Data.Common;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using WebAPIDemoV2.DataAccess;
 
 namespace WebAPIDemoV2.Tests;
 
@@ -15,13 +11,22 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
     {
         builder.ConfigureServices(services =>
         {
-            services.RemoveAll<WebApiDemoDbContext>();
-            services.RemoveAll<DbConnection>();
+            var dbContextDescriptor = services.SingleOrDefault(
+                d => d.ServiceType ==
+                     typeof(DbContextOptions<WebApiDemoDbContext>));
+
+            services.Remove(dbContextDescriptor);
+
+            var dbConnectionDescriptor = services.SingleOrDefault(
+                d => d.ServiceType ==
+                     typeof(DbConnection));
+
+            services.Remove(dbConnectionDescriptor);
 
             // Create open SqliteConnection so EF won't automatically close it.
             services.AddSingleton<DbConnection>(container =>
             {
-                var connection = new SqliteConnection("DataSource=:memory:");
+                var connection = new SqliteConnection("Data Source=:memory:");
                 connection.Open();
 
                 return connection;

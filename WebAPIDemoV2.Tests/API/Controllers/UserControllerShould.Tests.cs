@@ -1,28 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿namespace WebAPIDemoV2.Tests.API.Controllers;
 
-namespace WebAPIDemoV2.Tests.API.Controllers;
-
-public class UserControllerShould : IClassFixture<CustomWebApplicationFactory<Program>>
+public class UserControllerShould : AbstractControllerShould<User>
 {
-    private readonly CustomWebApplicationFactory<Program> _factory;
-
-    public UserControllerShould(CustomWebApplicationFactory<Program> factory)
+    public UserControllerShould(CustomWebApplicationFactory<Program> factory) : base(factory)
     {
-        _factory = factory;
     }
-
-    private HttpClient CreateClient()
-    {
-        using var scope = _factory.Services.CreateScope();
-        var context = scope.ServiceProvider.GetService<WebApiDemoDbContext>()!;
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-        return _factory.CreateClient(new WebApplicationFactoryClientOptions() {AllowAutoRedirect = false});
-    }
-        
     
     [Fact]
-    public async Task Return_List_Of_Users()
+    public async Task Return_200_Get_All()
     {
         // Arrange
         var client = CreateClient();
@@ -91,7 +76,7 @@ public class UserControllerShould : IClassFixture<CustomWebApplicationFactory<Pr
     }
 
     [Fact]
-    public async Task Patch_Updates_Content()
+    public async Task Return_200_On_Patch()
     {
         // Arrange
         var client = CreateClient();
