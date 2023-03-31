@@ -57,6 +57,14 @@ public abstract class Return<T> : IClassFixture<CustomWebApplicationFactory<Prog
         
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        foreach (var property in typeof(T).GetProperties())
+        {
+            Assert.Equal(
+                property.GetValue(posted), 
+                property.GetValue(value));
+            
+        }
         //Assert.Equal(getUser.FirstName, user.FirstName);
         //Assert.Equal(getUser.LastName, getUser.LastName);
     }
