@@ -11,7 +11,7 @@ public class UserControllerShould : Return<User>
     {
         // Arrange
         var client = CreateClient();
-        var user = await CreateUserAsync(client);
+        var user = await PostValueAsync(client);
         
         // Act
         var update = new { FirstName = "Updated Name" };
@@ -25,15 +25,6 @@ public class UserControllerShould : Return<User>
         Assert.Equal(update.FirstName, updated.FirstName);
         Assert.Equal(user.LastName, updated.LastName);
         
-    }
-    
-    private async Task<User> CreateUserAsync(HttpClient client)
-    {
-        User user = CreateDefaultValue();
-
-        var response = await client.PostAsJsonAsync("/users",user);
-        response.EnsureSuccessStatusCode();
-        return  (await response.Content.ReadFromJsonAsync<User>())!;
     }
     
     protected override User CreateDefaultValue() 
