@@ -1,5 +1,5 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WebAPIDemoV2.API.Commands;
 using WebAPIDemoV2.API.MinimalAPI;
 using WebAPIDemoV2.DataAccess;
 using WebAPIDemoV2.DataAccess.Interfaces;
@@ -15,6 +15,11 @@ builder.Services.AddControllers();
 //Add repositories to the application
 builder.Services.AddScoped(typeof(IRepository<>), typeof(AbstractRepository<>));
 
+// Add user and Authentication
+builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddAuthorizationBuilder();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -22,7 +27,10 @@ builder.Services.AddDbContext<WebApiDemoDbContext>(
     opt => opt.UseSqlite("Data Source=WebApiDemo.db")
 );
 
-
+builder.Services.AddDbContext<WebApiIdentityDbContext>(x => x.UseSqlite("Data Source=Identity.db"));
+builder.Services.AddIdentityCore<MyUser>()
+    .AddEntityFrameworkStores<WebApiIdentityDbContext>()
+    .AddApiEndpoints();
 
 var app = builder.Build();
 
@@ -38,6 +46,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapIdentityApi<MyUser>();
 
 app.MapRoutes<User>("/users", "Users")
     .MapGetAll()
