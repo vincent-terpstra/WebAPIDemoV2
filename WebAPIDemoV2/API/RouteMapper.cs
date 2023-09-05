@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using WebAPIDemoV2.DataAccess.Interfaces;
 
 namespace WebAPIDemoV2.API;
@@ -29,6 +30,12 @@ public class RouteMapper<T>
         return this;
     }
 
+    public RouteMapper<T> MapPost()
+    {
+        _group.MapPost("", CreatePost)
+            .WithTags(_tags);
+        return this;
+    }
 
     public RouteMapper<T> MapPost<TAdd>(Func<TAdd, T> map)
     {
@@ -52,8 +59,12 @@ public class RouteMapper<T>
     }
 
 
-    private T? Get([FromServices] IRepository<T> repo, [FromRoute] int id)
-        => repo.Get(id);
+    private IResult Get([FromServices] IRepository<T> repo, [FromRoute] int id)
+    {
+        T? value = repo.Get(id);
+        return value is null ? TypedResults.NotFound() : TypedResults.Ok(value);
+    }
+        
 
     private List<T> GetAll([FromServices] IRepository<T> repo)
         => repo.GetAll();
@@ -61,8 +72,15 @@ public class RouteMapper<T>
     private Func<IRepository<T>, TAdd, T> CreatePostWithMapFunction<TAdd>(Func<TAdd, T> map)
         => ([FromServices] repository, [FromBody] add) => repository.Add(map(add));
 
-    private void Delete([FromServices] IRepository<T> repo, [FromRoute] int id)
-        => repo.Delete(id);
+    private T CreatePost([FromServices] IRepository<T> repo, [FromBody] T add)
+        => repo.Add(add);
+    
+    private IResult Delete([FromServices] IRepository<T> repo, [FromRoute] int id)
+    {
+        repo.Delete(id);
+        return TypedResults.NoContent();
+    }
+        
 
     private T? Update([FromServices] IRepository<T> repo, [FromRoute] int id, [FromBody] T update)
         => repo.Update(id, update);

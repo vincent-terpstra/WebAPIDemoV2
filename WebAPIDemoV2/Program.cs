@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using WebAPIDemoV2.API.Commands;
+using WebAPIDemoV2.API.MinimalAPI;
 using WebAPIDemoV2.DataAccess;
 using WebAPIDemoV2.DataAccess.Interfaces;
 using WebAPIDemoV2.Models;
@@ -37,17 +39,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// app.MapRoutes<User>("/users", "Users")
-//     .MapGetAll()
-//     .MapGetById()
-//     .MapUpdate()
-//     .MapDelete()
-//     .MapPost<AddUser>(
-//         user => new()
-//         {
-//             FirstName = user.FirstName,
-//             LastName = user.LastName
-//         });
+app.MapRoutes<User>("/users", "Users")
+    .MapGetAll()
+    .MapGetById()
+    .MapUpdate()
+    .MapDelete()
+    .MapPost();
 app.Run();
 
 public partial class Program { }
