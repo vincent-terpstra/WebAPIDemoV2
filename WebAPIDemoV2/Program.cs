@@ -11,8 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 //Add repositories to the application
-builder.Services.AddScoped<IRepository<User>, AbstractRepository<User>>();
-builder.Services.AddScoped<IRepository<Text>, AbstractRepository<Text>>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(AbstractRepository<>));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
