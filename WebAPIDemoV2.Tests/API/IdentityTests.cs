@@ -33,4 +33,25 @@ public class IdentityTests : TestBase
         // Assert
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
+
+    [Fact]
+    public async Task Register_Route_AddsUser()
+    {
+        // Arrange
+        var client = CreateClient();
+
+        var request = new
+        {
+            UserName = "TestUser",
+            Password = "TestPassword@123",
+            Email = "user@test.ca"
+        };
+
+        // Act
+        var response = await client.PostAsJsonAsync("/register", request);
+
+        // Assert
+        response.AssertSuccess();
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
 }
