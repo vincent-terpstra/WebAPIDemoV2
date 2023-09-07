@@ -55,7 +55,8 @@ app.MapRoutes<User>("/users", "Users")
     .MapDelete()
     .MapPost();
 
-app.MapGet("/hello", () => "World");
+app.MapGet("/hello", () => "World")
+    .RequireAuthorization();
 
 app.Run();
 
