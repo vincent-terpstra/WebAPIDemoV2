@@ -54,6 +54,9 @@ app.MapRoutes<User>("/users", "Users")
     .MapUpdate()
     .MapDelete()
     .MapPost();
+
+app.MapGet("/hello", () => "World");
+
 app.Run();
 
 public partial class Program { }
