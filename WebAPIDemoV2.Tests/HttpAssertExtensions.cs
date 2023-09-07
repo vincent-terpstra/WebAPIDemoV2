@@ -9,4 +9,13 @@ public static class HttpAssertExtensions
             Assert.Fail(await response.Content.ReadAsStringAsync());
         }
     }
+
+    public static void AssertSuccess(this HttpResponseMessage responseMessage)
+    {
+        if (responseMessage.IsSuccessStatusCode is false)
+        {
+            var message = responseMessage.Content.ReadAsStringAsync().Result;
+            Assert.Fail(message);
+        }
+    }
 }
