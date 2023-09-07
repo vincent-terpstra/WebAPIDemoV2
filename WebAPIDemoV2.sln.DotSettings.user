@@ -1,8 +1,4 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5462e2c9_002D9855_002D4994_002Da015_002Dbd7aba6fa576/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldGetAllUsers" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::D4F4E082-0CB9-466A-9D35-3111BEA2C41C::net7.0::WebAPIDemoV2.Tests.API.Controllers.UserControllerShould&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::D4F4E082-0CB9-466A-9D35-3111BEA2C41C::net7.0::WebAPIDemoV2.Tests.API.Controllers.TextsControllerShould&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::D4F4E082-0CB9-466A-9D35-3111BEA2C41C::net7.0::WebAPIDemoV2.Tests.Expressions.Expressions.Expression_Tree_Decomposition&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
