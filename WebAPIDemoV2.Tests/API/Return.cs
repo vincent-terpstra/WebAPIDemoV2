@@ -3,7 +3,7 @@
 namespace WebAPIDemoV2.Tests.API;
 
 public abstract class Return<T> : IClassFixture<CustomWebApplicationFactory<Program>>
-    where T: BaseModel, new()
+    where T: BaseModel
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     private readonly string _baseRoute;

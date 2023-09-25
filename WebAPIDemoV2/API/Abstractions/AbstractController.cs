@@ -6,7 +6,7 @@ namespace WebAPIDemoV2.API.Abstractions;
 
 [ApiController]
 [Route("[controller]")]
-public class AbstractController<T> : ControllerBase where T : BaseModel, new()
+public class AbstractController<T> : ControllerBase where T : BaseModel
 {
     protected readonly IRepository<T> Repository;
 
@@ -33,7 +33,7 @@ public class AbstractController<T> : ControllerBase where T : BaseModel, new()
             return BadRequest(ModelState.Values);
         var added = Repository.Add(entity);
         
-        return CreatedAtAction("Get", new T(){ Id = entity.Id }, entity);
+        return CreatedAtAction("Get", new { added.Id }, added);
     }
 
     [HttpPatch("{id}")]

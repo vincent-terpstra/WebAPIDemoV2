@@ -6,7 +6,7 @@ namespace WebAPIDemoV2.DataAccess;
 
 //dotnet ef migrations add IdentityCreate --context WebAPIIdentityDbContext
 //dotnet ef database update --context WebAPIIDentityDbContext
-public class WebApiIdentityDbContext : IdentityDbContext<MyUser>
+public sealed class WebApiIdentityDbContext : IdentityDbContext<MyUser>
 {
     public WebApiIdentityDbContext(DbContextOptions<WebApiIdentityDbContext> options) : base(options) { }
 }

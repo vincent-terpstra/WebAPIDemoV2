@@ -1,11 +1,10 @@
 ﻿using WebAPIDemoV2.Domain.Entities;
-#nullable disable
 
 namespace WebAPIDemoV2.Models;
 
-public class User : BaseModel
+public sealed class User : BaseModel
 {
-    public string FirstName { get; set; }
-    
-    public string LastName { get; set; }
+    public string? FirstName { get; init; }
+
+    public string? LastName { get; init; }
 }

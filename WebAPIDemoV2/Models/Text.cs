@@ -1,9 +1,8 @@
 ﻿using WebAPIDemoV2.Domain.Entities;
-#nullable disable
 
 namespace WebAPIDemoV2.Models;
 
-public class Text : BaseModel
+public sealed class Text : BaseModel
 {
-    public string Value { get; set; }
+    public required string Value { get; set; }
 }

@@ -2,7 +2,7 @@
 
 namespace WebAPIDemoV2.Models;
 
-public class MyUser : IdentityUser
+public sealed class MyUser : IdentityUser
 {
     
 }
