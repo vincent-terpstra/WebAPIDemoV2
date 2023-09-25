@@ -4,8 +4,6 @@ namespace WebAPIDemoV2.DataAccess.Interfaces;
 
 public interface IRepository<T>
 {
-    public void SaveChanges();
-    
     public List<T> GetAll();
     public T? Get(int id);
     public T Add(T model);

@@ -15,10 +15,7 @@ public class AbstractRepository<T> : IRepository<T> where T : BaseModel, new()
         _context = context;
         _models = context.Set<T>();
     }
-
-    public void SaveChanges() 
-        => _context.SaveChanges();
-
+    
     public List<T> GetAll()
         => _models.AsNoTracking().ToList();
 
