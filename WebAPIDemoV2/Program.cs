@@ -27,7 +27,11 @@ builder.Services.AddDbContext<WebApiDemoDbContext>(
     opt => opt.UseSqlite("Data Source=WebApiDemo.db")
 );
 
-builder.Services.AddDbContext<WebApiIdentityDbContext>(x => x.UseSqlite("Data Source=Identity.db"));
+builder.Services.AddDbContext<WebApiIdentityDbContext>(
+    x => x.UseSqlite("Data Source=Identity.db")
+        .EnableSensitiveDataLogging()
+        .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+    );
 builder.Services.AddIdentityCore<MyUser>()
     .AddEntityFrameworkStores<WebApiIdentityDbContext>()
     .AddApiEndpoints();
