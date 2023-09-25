@@ -9,7 +9,10 @@ public class AbstractRepository<T> : IRepository<T> where T : BaseModel, new()
 {
     private readonly DbContext _context;
     private readonly DbSet<T> _models;
-
+    
+    private static readonly IEnumerable<PropertyInfo> Properties 
+        = typeof(T).GetProperties().Where(p => p.CanWrite).ToList();
+    
     public AbstractRepository(WebApiDemoDbContext context)
     {
         _context = context;
@@ -42,9 +45,6 @@ public class AbstractRepository<T> : IRepository<T> where T : BaseModel, new()
         }
     }
 
-    private readonly IEnumerable<PropertyInfo> _properties 
-        = typeof(T).GetProperties().Where(p => p.CanWrite);
-    
     public T? Update(int id, T update)
     {
         update.Id = id;
@@ -52,12 +52,13 @@ public class AbstractRepository<T> : IRepository<T> where T : BaseModel, new()
 
         if (model is not null)
         {
-            foreach (PropertyInfo prop in _properties)
+            foreach (PropertyInfo prop in Properties)
             {
                 var value = prop.GetValue(update);
                 if (value is not null)
                     prop.SetValue(model, value);
             }
+
             _context.SaveChanges();
         }
         return model;
